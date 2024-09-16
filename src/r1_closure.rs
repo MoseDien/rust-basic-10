@@ -1,5 +1,5 @@
 
-pub fn p_r1() {
+pub fn run() {
     add_short();
     add();
     add_capture();
@@ -8,13 +8,13 @@ pub fn p_r1() {
     test_apply_fn_mut();
 }
 
-// case 1: 
+// case 1: 闭包是一个匿名函数
 fn add_short() {
     let add = |x: i32, y: i32| -> i32 { x + y };
     println!("Result: {}", add(5, 3)); // 输出: Result: 8
 }
 
-// case 2: 自动类型推断，可以简写，但存在一些问题
+// case 2: 自动类型推断，可以简写，但存在一些类型问题，不是范型
 fn add() {
     let add = |x, y| x + y;
     println!("Result: {}", add(5, 3)); // 输出: Result: 8
@@ -41,7 +41,7 @@ fn create_closure() -> impl Fn(i32) -> i32 {
 }
 
 fn test_apply() {
-    // x是个闭包
+    // x是参数 - 闭包: 一个参数x，返回 x+1
     apply(|x| x + 1); // 输出: Result: 6
     
     //
@@ -53,7 +53,7 @@ fn consume_with_fn_once<F>(func: F, val: i32)
 where F: FnOnce(i32),
 {
     func(val); // 调用闭包，并传递参数
-    // func(val); // 不能再次调用
+    // func(val); // 不能再次调用 - 这也是FnOnce本来的含义
 }
 
 // 核心 - 拥有捕获的所有权，但不能修改捕获的变量
@@ -66,6 +66,7 @@ fn test_fnonce() {
     };
 
     consume_with_fn_once(consume_string, 42);
+    // consume_with_fn_once(consume_string, 42); // 也不能再次调用了 - 这也是once的含义
     // println!("{}", s); // 这里会报错，s 的所有权已经被移动到闭包中
 }
 
