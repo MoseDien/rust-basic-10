@@ -32,9 +32,9 @@ fn animal_sound(animal: &dyn Animal) {
 
 fn main() {
     let dog = Dog;
-    let cat = Cat;
+    let cat: &dyn Animal = &Cat;
 
     // 我们可以通过&dyn Animal调用animal_sound，传入不同的类型
     animal_sound(&dog); // 输出: Woof!
-    animal_sound(&cat); // 输出: Meow!
+    animal_sound(cat); // 输出: Meow!
 }
