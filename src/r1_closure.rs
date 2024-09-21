@@ -14,7 +14,9 @@ fn add_short() {
     println!("Result: {}", add(5, 3)); // 输出: Result: 8
 }
 
-// case 2: 自动类型推断，可以简写，但存在一些类型问题，不是范型
+// case 2: 自动类型推断，可以简写，
+// 但存在一些类型问题，不是范型
+// 也就是第一次被调用之后所有的类型就确定了，
 fn add() {
     let add = |x, y| x + y;
     println!("Result: {}", add(5, 3)); // 输出: Result: 8
@@ -22,7 +24,7 @@ fn add() {
     // println!("Result: {}", add(5.0, 3.1)); 
 }
 
-// case 3: 捕获环境中的变量
+// case 3: 捕获环境中的变量 - closure和fn的不同
 fn add_capture() {
     let x = 5;
     let add_x = |y: i32| y + x; // 捕获了变量x
@@ -30,6 +32,16 @@ fn add_capture() {
 }
 
 // case4: 闭包作为参数和返回值
+// Fn - 以只读的方式捕获变量，FnMut则可以修改捕获的变量
+/* Fn - Trait std::ops::Fn - Fn是一个trait，定义在ops里面
+pub trait Fn<Args>: FnMut<Args>
+where
+Args: Tuple,
+{
+// Required method
+extern "rust-call" fn call(&self, args: Args) -> Self::Output;
+}
+*/
 fn apply<F>(f: F)
 where F: Fn(i32) -> i32,
 {
@@ -49,6 +61,7 @@ fn test_apply() {
     println!("Result: {}", closure(5)); // 输出: Result: 6
 }
 
+// 同样的 FnOnce也是一个traits
 fn consume_with_fn_once<F>(func: F, val: i32)
 where F: FnOnce(i32),
 {
@@ -70,6 +83,7 @@ fn test_fnonce() {
     // println!("{}", s); // 这里会报错，s 的所有权已经被移动到闭包中
 }
 
+// FnMut 也是 traits
 fn apply_fn_mut<F>(mut func: F)
 where F: FnMut(),
 {
@@ -82,7 +96,7 @@ fn test_apply_fn_mut() {
 
     // 闭包可变地捕获了 count
     let increment = || {
-        count += 1; // 闭包对 count 进行了修改
+        count += 1; // 闭包对捕获的 count 进行了修改
         println!("Count: {}", count);
     };
 

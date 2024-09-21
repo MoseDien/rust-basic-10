@@ -5,3 +5,6 @@ pub mod r4_deref;
 pub mod r5_dyn;
 pub mod r6_mut;
 pub mod r7_error;
+pub mod r8_ownership;
+pub mod r9_copyclone;
+pub mod r10_string;

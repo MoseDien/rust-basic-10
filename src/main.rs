@@ -6,14 +6,20 @@ use rust_10::r4_deref;
 use rust_10::r5_dyn;
 use rust_10::r6_mut;
 use rust_10::r7_error;
+use rust_10::r8_ownership;
+use rust_10::r9_copyclone;
+use rust_10::r10_string;
 
 fn main() {
     println!("Hello, world!");
-    r7_error::run();
+    // r10_string::run();
+    // r9_copyclone::run();
+    // r8_ownership::run();
+    // r7_error::run();
     // r6_mut::run();
     // r5_dyn::run();
     // r4_deref::run();
-    // r3_arc::run();
+    r3_arc::run();
     // r2_box::run();
     // r1_closure::run();
 }
