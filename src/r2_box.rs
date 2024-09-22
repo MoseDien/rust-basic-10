@@ -23,6 +23,14 @@ fn create_on_heap() {
 }
 
 /*
+// Rust 需要在编译时知道类型占用多少空间, 但如下的定义是不知道大小的
+//  ----- recursive without indirection
+enum List2 {
+    Cons(i32, List2),
+    Nil,
+}
+*/
+/*
 一个递归数据类型
 这是一个链表，实现效果类似于堆栈stack - 
 Cons 来自于Lisp，Construct
@@ -70,12 +78,3 @@ fn creat_list() {
     // 打印链表
     list.print(); // 输出: 3 2 1
 }
-
-/*
-// Rust 需要在编译时知道类型占用多少空间, 但如下的定义是不知道大小的
-//  ----- recursive without indirection
-enum List2 {
-    Cons(i32, List2),
-    Nil,
-}
-*/

@@ -20,6 +20,7 @@ struct ComplexObject {
 
 pub fn run() {
     main();
+    main_string();
 }
 
 fn main() {
@@ -39,4 +40,27 @@ fn main() {
     let obj4 = obj3;
     // println!("obj3: {:?}", obj3); // 这行会导致编译错误，因为 obj3 的所有权已经移动到 obj4
     println!("obj4: {:?}", obj4);
+}
+
+/*
+// String 没有实现copy，但是实现了clone
+内存管理：String 在堆上分配内存来存储其内容。如果 String 实现了 Copy，那么每次赋值或传递 String 时都会复制整个堆内存，这可能会导致性能问题。
+所有权语义：String 遵循 Rust 的所有权规则，这意味着当你将一个 String 赋值给另一个变量时，所有权会被转移，而不是复制。
+资源管理：String 可能包含大量数据，复制可能会非常昂贵。Rust 通过不实现 Copy 来鼓励开发者明确考虑何时需要复制数据。
+*/
+fn main_string() {
+    // 使用 String
+    let s1 = String::from("hello");
+    let s2 = s1; // 没有实现copy从而直接转移所有权
+    // println!("{}", s1);  // 这行会导致编译错误，因为 s1 的所有权已经移动到 s2
+
+    // 对比使用实现了 Copy 的类型
+    let x1 = 5;
+    let x2 = x1;
+    println!("x1 = {}, x2 = {}", x1, x2);  // 这是可以的，因为 i32 实现了 Copy
+
+    // 如果需要复制 String 的内容，可以使用 clone 方法
+    let s3 = String::from("world");
+    let s4 = s3.clone(); // 实现了clone
+    println!("s3 = {}, s4 = {}", s3, s4);  // 这是可以的，因为我们显式地克隆了 s3
 }

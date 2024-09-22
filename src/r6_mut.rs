@@ -5,6 +5,7 @@ struct MyStruct {
     field: i32,
 }
 
+// 如果想修改MyStruct，则必须提供 mut的函数
 trait MyTrait {
     fn modify_field(&mut self);
 }

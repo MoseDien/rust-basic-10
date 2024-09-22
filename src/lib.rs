@@ -8,3 +8,5 @@ pub mod r7_error;
 pub mod r8_ownership;
 pub mod r9_copyclone;
 pub mod r10_string;
+pub mod r11_optional;
+pub mod r12_binding;

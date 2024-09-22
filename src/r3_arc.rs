@@ -163,6 +163,7 @@ fn main_rc_mut() {
     // 创建两个 Rc 克隆
     let counter1 = Rc::clone(&counter);
     let counter2 = Rc::clone(&counter);
+    let counter3 = Rc::clone(&counter);
 
     // 使用第一个引用修改计数器
     {
@@ -181,6 +182,6 @@ fn main_rc_mut() {
     // 使用原始引用读取计数器的值
     println!("Final count: {}", counter.borrow().get_count());
 
-    // 打印引用计数
+    // 打印引用计数 - 这个是对clone的计数
     println!("Reference count: {}", Rc::strong_count(&counter));
 }

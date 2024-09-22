@@ -9,9 +9,13 @@ use rust_10::r7_error;
 use rust_10::r8_ownership;
 use rust_10::r9_copyclone;
 use rust_10::r10_string;
+use rust_10::r11_optional;
+use rust_10::r12_binding;
 
 fn main() {
     println!("Hello, world!");
+    r12_binding::run();
+    // r11_optional::run();
     // r10_string::run();
     // r9_copyclone::run();
     // r8_ownership::run();
@@ -19,7 +23,7 @@ fn main() {
     // r6_mut::run();
     // r5_dyn::run();
     // r4_deref::run();
-    r3_arc::run();
+    // r3_arc::run();
     // r2_box::run();
     // r1_closure::run();
 }
